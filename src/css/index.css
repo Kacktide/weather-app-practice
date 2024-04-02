@@ -187,3 +187,9 @@ body {
 .next-btn ion-icon {
   color: #ffffff7c;
 }
+.error-404 {
+  min-height: 40vh;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+}
