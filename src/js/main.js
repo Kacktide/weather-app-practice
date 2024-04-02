@@ -9,9 +9,10 @@ const windSpeedOutput = document.getElementById("wind");
 
 const intro = document.querySelector(".intro");
 const weatherBox = document.querySelector(".weather");
-const nextBtn = document.querySelector(".next-btn");
+const nextBtn = document.querySelectorAll(".next-btn");
 const checkBox = document.querySelector("#useMyLocation");
-
+const error404 = document.querySelector(".error-404");
+let rngTime = Math.floor(Math.random() * 4000 + 2000);
 // fake loader
 const loader = document.querySelector(".loader-wrapper");
 
@@ -24,7 +25,7 @@ form.addEventListener("submit", (e) => {
   setTimeout(() => {
     weatherBox.classList.remove("hidden");
     loader.classList.add("hidden");
-  }, Math.floor(Math.random() * 4000 + 2000));
+  }, rngTime);
 
   checkWeather(formInput.value);
   formInput.value = "";
@@ -34,34 +35,39 @@ async function checkWeather(location) {
   const API_KEY = document.querySelector(".browserId").innerText;
   const URL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`;
 
-  const weather = await fetch(URL).then((res) => res.json());
+  try {
+    const weather = await fetch(URL).then((res) => res.json());
+    temperatureOutput.innerText = Math.round(weather.main.temp - 273.15);
+    locationOutput.innerText = weather.name;
+    descriptionOutput.innerText = weather.weather[0].description;
+    humidityOutput.innerText = `${weather.main.humidity}%`;
+    windSpeedOutput.innerText = `${weather.wind.speed} km/hr`;
 
-  temperatureOutput.innerText = Math.round(weather.main.temp - 273.15);
-  locationOutput.innerText = weather.name;
-  descriptionOutput.innerText = weather.weather[0].description;
-  humidityOutput.innerText = `${weather.main.humidity}%`;
-  windSpeedOutput.innerText = `${weather.wind.speed} km/hr`;
+    switch (weather.weather[0].main) {
+      case "Clouds":
+        weatherImg.src = "/src/img/cloudy-weather.png";
+        break;
 
-  if (weather.cod === "404") {
-  }
-
-  switch (weather.weather[0].main) {
-    case "Clouds":
-      weatherImg.src = "/src/img/cloudy-weather.png";
-      break;
-
-    case "Clear":
-      weatherImg.src = "/src/img/clear-weather.png";
-      break;
-    case "Mist":
-      weatherImg.src = "/src/img/haze-weather.png";
-      break;
-    case "Rain":
-      weatherImg.src = "/src/img/rainy-weather.png";
-      break;
-    case "Snow":
-      weatherImg.src = "/src/img/snow-weather.png";
-      break;
+      case "Clear":
+        weatherImg.src = "/src/img/clear-weather.png";
+        break;
+      case "Mist":
+        weatherImg.src = "/src/img/haze-weather.png";
+        break;
+      case "Rain":
+        weatherImg.src = "/src/img/rainy-weather.png";
+        break;
+      case "Snow":
+        weatherImg.src = "/src/img/snow-weather.png";
+        break;
+    }
+  } catch (err) {
+    console.error(err);
+    setTimeout(() => {
+      weatherBox.classList.add("hidden");
+      intro.classList.add("hidden");
+      error404.classList.remove("hidden");
+    }, rngTime);
   }
 
   addEventListener("keypress", (e) => {
@@ -72,11 +78,13 @@ async function checkWeather(location) {
   });
 }
 
-nextBtn.addEventListener("click", backToSearch);
+nextBtn.forEach((item) => item.addEventListener("click", backToSearch));
 
 function backToSearch() {
   intro.classList.remove("hidden");
   weatherBox.classList.add("hidden");
+  loader.classList.add("hidden");
+  error404.classList.add("hidden");
 }
 
 checkBox.addEventListener("click", () => {
@@ -105,5 +113,3 @@ async function findUserCity(pos) {
   ).then((res) => res.json());
   formInput.value = userLocation.address.town;
 }
-
-// https://geocode.maps.co/reverse?lat=latitude&lon=longitude&api_key=660aab0c772b4462137516wbm247f05
