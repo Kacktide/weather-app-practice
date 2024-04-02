@@ -1,0 +1,24 @@
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 75px;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  aspect-ratio: 1;
+  background: #a4eaff;
+  opacity: 0.4;
+  animation: rotateX 1s infinite;
+}
+@keyframes rotateX {
+  0% {
+    transform: translate(-50%, -50%) perspective(150px) rotateX(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) perspective(150px) rotateX(180deg);
+  }
+}
+.loader-wrapper {
+  width: 100%;
+  height: 50vh;
+}

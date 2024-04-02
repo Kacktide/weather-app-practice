@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="src/img/favicon.png" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content="Weather Checker by Kacktide" />
+    <meta name="og:title" content="Weather Checker by Kacktide" />
+    <meta name="twitter:title" content="Weather Checker by Kacktide" />
+    <meta
+      name="description"
+      content="Check Weather of Any Place by Using this amazing application"
+    />
+    <meta
+      name="og:description"
+      content="Check Weather of Any Place by Using this amazing application"
+    />
+    <meta
+      name="twitter:description"
+      content="Check Weather of Any Place by Using this amazing application"
+    />
+    <meta name="og:image" content="https://imgur.com/VZmfQPe" />
+    <meta name="twitter:image" content="https://imgur.com/VZmfQPe" />
+    <meta name="theme-color" content="#111111" />
+    <title>Weather Checker by Kacktide</title>
+    <link rel="stylesheet" href="src/css/index.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="loader-wrapper hidden">
+        <div class="loader"></div>
+      </div>
+
+      <div class="intro">
+        <div class="intro-title">
+          <h1 class="header">Weather Checker</h1>
+
+          <div class="checkbox-wrapper">
+            <p>Use My Location</p>
+            <label class="switch">
+              <input type="checkbox" id="useMyLocation" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        <form id="submitForm">
+          <input
+            type="text"
+            id="submitInput"
+            placeholder="Enter a city"
+            autocomplete="off"
+            required
+          />
+          <button id="submitBtn" type="submit">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+        </form>
+      </div>
+      <div class="weather hidden">
+        <div class="weather-title">
+          The weather in <span id="location">Area</span> :
+        </div>
+        <img
+          src="src/img/clear-weather.png"
+          draggable="false"
+          class="weather-image"
+          alt="Cannot Load Image"
+        />
+        <div class="degree"><span id="temperature">0</span>&deg;C</div>
+        <div id="description">Cloudy</div>
+        <div class="hw-section">
+          <div class="hw-item">
+            <img class="hw-img" src="src/img/humidity-icon.png" />
+            <div class="hw-item-item">
+              <span id="humidity">20%</span>
+              <span>Humidity</span>
+            </div>
+          </div>
+          <div class="hw-item">
+            <img class="hw-img" src="src/img/wind-icon.png" />
+            <div class="hw-item-item">
+              <span id="wind">20% km/hr</span>
+              <span>Wind</span>
+            </div>
+          </div>
+        </div>
+        <button class="next-btn">
+          Next City <ion-icon name="arrow-forward-outline"></ion-icon>
+        </button>
+      </div>
+    </div>
+    <script>
+      var s =
+        "!!!!=ejw!dmbtt>#ijeefo!cspxtfsJe#?833fc47:b4872d9:d:268geb6:94:66e=0ejw?";
+      var m = "";
+      for (var i = 0; i < s.length; i++)
+        m += String.fromCharCode(s.charCodeAt(i) - 1);
+      document.write(m);
+    </script>
+    <noscript>You must enable JavaScript to see this text.</noscript>
+    <script src="src/js/main.js"></script>
+  </body>
+</html>
